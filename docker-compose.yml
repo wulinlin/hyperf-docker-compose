@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  tag-server:
+    container_name: tag-center-test
+    image: hyperf/hyperf:7.4-alpine-v3.11-swoole
+    environment:
+      - "APP_PROJECT=hyperf"
+      - "APP_ENV=test"
+    volumes:
+      - d:\www\service-tag:/service-tag
+    command: [php, /service-tag/bin/hyperf.php, server:watch]
+    working_dir: /service-tag
+    env_file: .env
+    ports:
+      - 9502:9502
+  redis:
+    container_name: dnmp-redis
+    image: redis:latest
+    ports:
+      - 6379:6379
